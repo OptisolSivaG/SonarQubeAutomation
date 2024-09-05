@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             SonarQubeAutomationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "Hi Siva",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
