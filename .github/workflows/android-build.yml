@@ -20,6 +20,12 @@ jobs:
       - name : Build with Gradle
         run : ./gradlew build
 
+      - name : Upload a Build Artifact
+        uses : actions/upload-artifact@v3.1.3
+        with :
+          name : SonarQubeAutomation-$(date +"%d-%m-%Y %I:%M %p").apk
+          path : app/build/outputs/apk/debug/app-debug.apk
+
       - name: Generate Release Notes
         run: |
           echo "Release Notes for build on $(date +"%d-%m-%Y %I:%M %p")" > release-notes.txt
@@ -32,9 +38,3 @@ jobs:
         with:
           name: release-notes.txt
           path: release-notes.txt
-
-      - name : Upload a Build Artifact
-        uses : actions/upload-artifact@v3.1.3
-        with :
-          name : SonarQubeAutomation.apk
-          path : app/build/outputs/apk/debug/app-debug.apk
