@@ -18,16 +18,11 @@ jobs:
           distribution: 'adopt'
 
       - name : Build with Gradle
+        uses : ./gradlew build
         run : ./gradlew build
 
-      - name: Generate timestamp and rename APK
-        run: |
-            TIMESTAMP=$(date +"%d-%m-%Y-%I-%M-%p")
-            mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/SonarQubeAutomation-$TIMESTAMP.apk
-          shell: bash
-
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v3.1.3
-        with:
-            name: SonarQubeAutomation-${{ steps.timestamp.outputs.timestamp }}.apk
-            path: app/build/outputs/apk/debug/*.apk
+      - name : Upload a Build Artifact
+        uses : actions/upload-artifact@v3.1.3
+        with :
+          name : SonarQubeAutomation.apk
+          path : app/build/outputs/apk/debug/app-debug.apk
