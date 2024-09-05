@@ -20,6 +20,19 @@ jobs:
       - name : Build with Gradle
         run : ./gradlew build
 
+      - name: Generate Release Notes
+        run: |
+          echo "Release Notes for build on $(date +"%d-%m-%Y %I:%M %p")" > release-notes.txt
+          echo "-----------------------------------" >> release-notes.txt
+          git log -5 --pretty=format:"%h - %s (%an)" >> release-notes.txt
+        shell: bash
+
+      - name: Upload Release Notes
+        uses: actions/upload-artifact@v3.1.3
+        with:
+          name: release-notes.txt
+          path: release-notes.txt
+
       - name : Upload a Build Artifact
         uses : actions/upload-artifact@v3.1.3
         with :
