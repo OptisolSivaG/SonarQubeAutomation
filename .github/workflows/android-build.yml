@@ -12,7 +12,7 @@ jobs:
         uses : actions/checkout@v4.1.0
 
       - name : Setup Java SDK
-        uses : actions/setup-java@v.3.13.0
+        uses : actions/setup-java@v4.2.2
         with :
           java-version: '17'
           distributions: 'adopt'
