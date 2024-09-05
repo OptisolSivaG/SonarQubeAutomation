@@ -15,7 +15,7 @@ jobs:
         uses : actions/setup-java@v4.2.2
         with :
           java-version: '17'
-          distributions: 'adopt'
+          distributions: 'zulu'
 
       - name : Build with Gradle
         uses : ./gradlew build
