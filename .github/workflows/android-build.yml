@@ -20,11 +20,15 @@ jobs:
       - name : Build with Gradle
         run : ./gradlew build
 
-      - name : Upload a Build Artifact
-        uses : actions/upload-artifact@v3.1.3
-        with :
-          name : SonarQubeAutomation.apk
-          path : app/build/outputs/apk/debug/*.apk
+      - name: Build all artifacts
+        id: buildAllApks
+        uses: eskatos/gradle-command-action@v1.3.3
+        with:
+          gradle-version: current
+          wrapper-cache-enabled: true
+          dependencies-cache-enabled: true
+          configuration-cache-enabled: true
+          arguments: assembleRelease
 
       - name: Generate Release Notes
         run: |
