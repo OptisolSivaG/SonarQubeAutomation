@@ -29,6 +29,28 @@ android {
             )
         }
     }
+
+    flavorDimensions += "usertype"
+
+    productFlavors {
+        create("free") {
+            dimension = "usertype"
+            val appName = "SonarQubeAutomation"
+            manifestPlaceholders["appName"] = appName
+            applicationIdSuffix = ".demo"
+            versionName = "0.0.1"
+            versionNameSuffix = ".1"
+            versionCode = (versionName + versionNameSuffix).replace(".", "").toInt()
+            val apkName = "${appName}_$versionName$versionNameSuffix($versionCode).apk"
+
+            // change app name block below
+            buildOutputs.all {
+                val variantOutputImpl = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+                variantOutputImpl.outputFileName =  apkName
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
