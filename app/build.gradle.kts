@@ -12,11 +12,23 @@ android {
         minSdk = 28
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.1.0"
+        versionNameSuffix = ".1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+
+        val appName = "SonarQubeAutomation"
+        manifestPlaceholders["appName"] = appName
+        versionCode = (versionName + versionNameSuffix).replace(".", "").toInt()
+        val apkName = "${appName}_$versionName$versionNameSuffix($versionCode).apk"
+
+        // change app name block below
+        buildOutputs.all {
+            val variantOutputImpl = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+            variantOutputImpl.outputFileName =  apkName
         }
     }
 
@@ -30,7 +42,7 @@ android {
         }
     }
 
-    flavorDimensions += "usertype"
+/*    flavorDimensions += "usertype"
 
     productFlavors {
         create("free") {
@@ -49,7 +61,7 @@ android {
                 variantOutputImpl.outputFileName =  apkName
             }
         }
-    }
+    }*/
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
